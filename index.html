@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="שרת מיינקראפט קהילתי נגיש ובטוח לאנשים עם צרכים מיוחדים - HelpingIL | MC">
+    <title>HelpingIL | MC - שרת מיינקראפט קהילתי</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧩</text></svg>">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Rubik', 'Assistant', 'sans-serif'],
+                        'display': ['Alef', 'sans-serif'],
+                    },
+                    colors: {
+                        minecraft: {
+                            'dirt': '#7A5426',
+                            'grass': '#5A8F3D',
+                            'stone': '#7D7D7D',
+                            'wood': '#AC8147',
+                            'water': '#3A7AA7',
+                            'diamond': '#3FD4E3',
+                            'emerald': '#17B518',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Alef:wght@400;700&family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Rubik', 'Assistant', sans-serif;
+            background-color: #f5f5f5;
+            scroll-behavior: smooth;
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1607513746994-51f730a44832?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        
+        .section-title {
+            font-family: 'Alef', sans-serif;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 4px;
+            bottom: -8px;
+            right: 0;
+            background: linear-gradient(90deg, #3A7AA7, #5A8F3D);
+            border-radius: 2px;
+        }
+        
+        .vip-card {
+            transition: all 0.3s ease;
+            border-top: 4px solid;
+        }
+        
+        .vip-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: color 0.2s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: -3px;
+            right: 0;
+            background-color: #5A8F3D;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 100%;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            color: #5A8F3D;
+        }
+        
+        .testimonial-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .player-card {
+            transition: all 0.3s ease;
+        }
+        
+        .player-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .news-card {
+            transition: all 0.3s ease;
+        }
+        
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .accessibility-btn {
+            transition: all 0.3s ease;
+        }
+        
+        .accessibility-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        /* High contrast mode */
+        body.high-contrast {
+            background-color: #000 !important;
+            color: #FFF !important;
+        }
+        
+        body.high-contrast .bg-white {
+            background-color: #000 !important;
+            color: #FFF !important;
+            border-color: #FFF !important;
+        }
+        
+        body.high-contrast .text-gray-700, 
+        body.high-contrast .text-gray-600 {
+            color: #FFF !important;
+        }
+        
+        /* Large text mode */
+        body.large-text {
+            font-size: 1.2rem;
+        }
+        
+        body.large-text h1 {
+            font-size: 2.8rem;
+        }
+        
+        body.large-text h2 {
+            font-size: 2.2rem;
+        }
+        
+        body.large-text h3 {
+            font-size: 1.8rem;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animate-fadeIn {
+            animation: fadeIn 0.8s ease forwards;
+        }
+        
+        .delay-100 {
+            animation-delay: 0.1s;
+        }
+        
+        .delay-200 {
+            animation-delay: 0.2s;
+        }
+        
+        .delay-300 {
+            animation-delay: 0.3s;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #5A8F3D;
+            border-radius: 5px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3A7AA7;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+    <!-- Accessibility Toolbar -->
+    <div class="fixed bottom-4 left-4 z-50 flex flex-col space-y-2">
+        <button id="fontSizeBtn" class="accessibility-btn bg-minecraft-grass text-white p-3 rounded-full shadow-lg">
+            <i class="fas fa-text-height"></i>
+        </button>
+        <button id="contrastBtn" class="accessibility-btn bg-minecraft-stone text-white p-3 rounded-full shadow-lg">
+            <i class="fas fa-adjust"></i>
+        </button>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="bg-minecraft-dirt text-white shadow-lg sticky top-0 z-40">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-4 space-x-reverse">
+                    <i class="fas fa-cube text-2xl text-minecraft-emerald"></i>
+                    <span class="text-xl font-bold font-display">HelpingIL | MC</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8 space-x-reverse">
+                    <a href="#home" class="nav-link active py-2 px-1">בית</a>
+                    <a href="#about" class="nav-link py-2 px-1">אודות</a>
+                    <a href="#rules" class="nav-link py-2 px-1">חוקים</a>
+                    <a href="#vip" class="nav-link py-2 px-1">VIP</a>
+                    <a href="#gallery" class="nav-link py-2 px-1">גלריה</a>
+                    <a href="#news" class="nav-link py-2 px-1">חדשות</a>
+                    <a href="#contact" class="nav-link py-2 px-1">צור קשר</a>
+                    <a href="#" class="bg-minecraft-grass hover:bg-minecraft-water text-white font-bold py-2 px-4 rounded transition duration-300 flex items-center">
+                        <i class="fab fa-discord ml-2"></i>
+                        דיסקורד
+                    </a>
+                </div>
+                <button class="md:hidden focus:outline-none" id="mobileMenuBtn">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="md:hidden bg-minecraft-dirt hidden fixed inset-0 z-30 pt-20" id="mobileMenu">
+        <div class="container mx-auto px-4 py-2 flex flex-col space-y-4 space-y-reverse h-full overflow-y-auto">
+            <a href="#home" class="py-3 px-4 text-white text-lg border-b border-minecraft-stone">בית</a>
+            <a href="#about" class="py-3 px-4 text-white text-lg border-b border-minecraft-stone">אודות</a>
+            <a href="#rules" class="py-3 px-4 text-white text-lg border-b border-minecraft-stone">חוקים</a>
+            <a href="#vip" class="py-3 px-4 text-white text-lg border-b border-minecraft-stone">VIP</a>
+            <a href="#gallery" class="py-3 px-4 text-white text-lg border-b border-minecraft-stone">גלריה</a>
+            <a href="#news" class="py-3 px-4 text-white text-lg border-b border-minecraft-stone">חדשות</a>
+            <a href="#contact" class="py-3 px-4 text-white text-lg border-b border-minecraft-stone">צור קשר</a>
+            <a href="#" class="py-3 px-4 bg-minecraft-grass text-white text-lg rounded-lg flex items-center justify-center mt-4">
+                <i class="fab fa-discord ml-2"></i>
+                דיסקורד
+            </a>
+            <button class="py-3 px-4 text-white text-lg mt-auto mb-8" id="closeMobileMenu">
+                <i class="fas fa-times mr-2"></i>
+                סגור
+            </button>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero text-white py-32 flex-grow animate-fadeIn">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 font-display">HelpingIL | MC</h1>
+            <p class="text-2xl md:text-3xl mb-10 max-w-3xl mx-auto leading-relaxed">"שרת מיינקראפט קהילתי – נגיש, בטוח, ומכיל. משחקים יחד – בלי הבדל."</p>
+            <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-6 space-x-reverse">
+                <button class="bg-minecraft-emerald hover:bg-minecraft-diamond text-white font-bold py-4 px-10 rounded-full text-lg transition duration-300 transform hover:scale-105 shadow-lg">
+                    הצטרפו עכשיו
+                </button>
+                <a href="#about" class="flex items-center text-white hover:text-minecraft-diamond transition duration-300">
+                    <span>גלו עוד</span>
+                    <i class="fas fa-chevron-down mr-2 mt-1"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="bg-white py-12 shadow-md">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-around items-center text-center space-y-8 md:space-y-0 space-y-reverse">
+                <div class="flex flex-col items-center animate-fadeIn delay-100">
+                    <div class="text-minecraft-diamond text-4xl font-bold mb-2 flex items-center">
+                        <i class="fas fa-users mr-3"></i>
+                        <span id="playerCount">50+</span>
+                    </div>
+                    <p class="text-gray-700">שחקנים מחוברים</p>
+                </div>
+                <div class="flex flex-col items-center animate-fadeIn delay-200">
+                    <div class="text-minecraft-emerald text-4xl font-bold mb-2">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <p class="text-gray-700">פעיל כל יום בין השעות 10:00–23:00</p>
+                </div>
+                <div class="flex flex-col items-center animate-fadeIn delay-300">
+                    <div class="text-minecraft-grass text-4xl font-bold mb-2">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <p class="text-gray-700">צוות מסור זמין 24/7</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-minecraft-dirt section-title">אודות השרת</h2>
+            
+            <div class="flex flex-col lg:flex-row items-center gap-8">
+                <div class="lg:w-1/2 animate-fadeIn">
+                    <div class="bg-white p-6 rounded-lg shadow-lg">
+                        <h3 class="text-xl font-bold mb-4 text-minecraft-water">החזון שלנו</h3>
+                        <p class="text-gray-700 mb-4 leading-relaxed">
+                            HelpingIL | MC נוצר מתוך רצון ליצור מרחב משחק בטוח ונגיש עבור שחקנים עם צרכים מיוחדים. 
+                            אנחנו מאמינים שלכל אחד מגיעה הזדמנות שווה ליהנות מעולם המיינקראפט ללא חשש מהצקות או אפליה.
+                        </p>
+                        <p class="text-gray-700 leading-relaxed">
+                            השרת שלנו מציע חוויה מותאמת אישית עם תכונות נגישות ייחודיות, צוות תומך וסביבה מכילה 
+                            שמעודדת יצירתיות ושיתוף פעולה בין השחקנים.
+                        </p>
+                    </div>
+                    
+                    <div class="mt-8 bg-white p-6 rounded-lg shadow-lg">
+                        <h3 class="text-xl font-bold mb-4 text-minecraft-water">תכונות מיוחדות</h3>
+                        <ul class="space-y-3 space-y-reverse">
+                            <li class="flex items-start space-x-3 space-x-reverse">
+                                <i class="fas fa-check-circle text-minecraft-emerald mt-1"></i>
+                                <span class="text-gray-700">מערכת אזהרות חזותיות ושמיעתיות מותאמות</span>
+                            </li>
+                            <li class="flex items-start space-x-3 space-x-reverse">
+                                <i class="fas fa-check-circle text-minecraft-emerald mt-1"></i>
+                                <span class="text-gray-700">פקודות פשוטות וקלות להבנה</span>
+                            </li>
+                            <li class="flex items-start space-x-3 space-x-reverse">
+                                <i class="fas fa-check-circle text-minecraft-emerald mt-1"></i>
+                                <span class="text-gray-700">אזורים מוגנים ללא PvP</span>
+                            </li>
+                            <li class="flex items-start space-x-3 space-x-reverse">
+                                <i class="fas fa-check-circle text-minecraft-emerald mt-1"></i>
+                                <span class="text-gray-700">צוות מיומן בעל הכשרה בהכלה ונגישות</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="lg:w-1/2 animate-fadeIn delay-100">
+                    <div class="bg-white p-6 rounded-lg shadow-lg">
+                        <h3 class="text-xl font-bold mb-6 text-minecraft-water">אירוע קרוב</h3>
+                        <div class="bg-minecraft-stone bg-opacity-10 p-4 rounded-lg mb-6">
+                            <h4 class="text-lg font-bold text-minecraft-dirt mb-2">פתיחת השרת!</h4>
+                            <p class="text-gray-700 mb-4">סמנו ריאקשן בשרת הדיסקורד שלנו וקבלו את הרולים המתאימים!</p>
+                            <div class="flex items-center space-x-4 space-x-reverse text-minecraft-dirt">
+                                <div>
+                                    <i class="far fa-calendar-alt mr-2"></i>
+                                    <span>אין לדעת...</span>
+                                </div>
+                                <div>
+                                    <i class="far fa-clock mr-2"></i>
+                                    <span> צוות זמין בין השעות : 18:00 - 21:00</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="countdown" class="text-center py-4 bg-minecraft-grass bg-opacity-10 rounded-lg">
+                            <h4 class="font-bold text-minecraft-dirt mb-2">נשארו עד לאירוע:</h4>
+                            <div class="flex justify-center space-x-6 space-x-reverse">
+                                <div class="flex flex-col items-center">
+                                    <span id="days" class="text-3xl font-bold text-minecraft-water">X</span>
+                                    <span class="text-sm text-gray-600">ימים</span>
+                                </div>
+                                <div class="flex flex-col items-center">
+                                    <span id="hours" class="text-3xl font-bold text-minecraft-water">X</span>
+                                    <span class="text-sm text-gray-600">שעות</span>
+                                </div>
+                                <div class="flex flex-col items-center">
+                                    <span id="minutes" class="text-3xl font-bold text-minecraft-water">X</span>
+                                    <span class="text-sm text-gray-600">דקות</span>
+                                </div>
+                                <div class="flex flex-col items-center">
+                                    <span id="seconds" class="text-3xl font-bold text-minecraft-water">X</span>
+                                    <span class="text-sm text-gray-600">שניות</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8 bg-white p-6 rounded-lg shadow-lg">
+                        <h3 class="text-xl font-bold mb-4 text-minecraft-water">הצוות שלנו</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div class="player-card bg-gray-50 p-4 rounded-lg text-center">
+                                <div class="w-16 h-16 bg-minecraft-water bg-opacity-20 rounded-full mx-auto mb-3 flex items-center justify-center">
+                                    <i class="fas fa-crown text-minecraft-water text-xl"></i>
+                                </div>
+                                <h4 class="font-bold text-t-black-0">Maor</h4>
+                                <p class="text-sm text-amber-700">C.E.O</p>
+                            </div>
+                            <div class="player-card bg-gray-50 p-4 rounded-lg text-center">
+                                <div class="w-16 h-16 bg-minecraft-water bg-opacity-20 rounded-full mx-auto mb-3 flex items-center justify-center">
+                                    <i class="fas fa-code text-minecraft-water text-xl"></i>
+                                </div>
+                                <h4 class="font-bold text-black-0">ZeDragonBoy</h4>
+                                <p class="text-sm text-green-600">Technical manager</p>
+                            </div>
+                            <div class="player-card bg-gray-50 p-4 rounded-lg text-center">
+                                <div class="w-16 h-16 bg-minecraft-water bg-opacity-20 rounded-full mx-auto mb-3 flex items-center justify-center">
+                                    <i class="fas fa-users text-minecraft-water text-xl"></i>
+                                </div>
+                                <h4 class="font-bold text-t-black-0">.Roi</h4>
+                                <p class="text-sm text-yellow-500">Community Manager</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rules Section -->
+    <section id="rules" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-minecraft-dirt section-title">חוקי השרת</h2>
+            
+            <div class="max-w-4xl mx-auto bg-minecraft-stone bg-opacity-5 p-8 rounded-lg shadow-inner">
+                <div class="mb-8">
+                    <h3 class="text-xl font-bold mb-4 text-minecraft-water flex items-center">
+                        <i class="fas fa-exclamation-triangle mr-3"></i>
+                        כללי התנהגות
+                    </h3>
+                    <ul class="space-y-3 space-y-reverse list-disc pr-5 text-red-500">
+<li>יש לשמור על כבוד הדדי בין כל השחקנים – קללות, העלבות או התנהגות פוגענית אסורות בהחלט.</li>
+<li>אסור להטריד או להציק לשחקנים אחרים במהלך המשחק או בשיחה בצ'אט.</li>
+<li>אין לקלל או להשתמש בשפה בוטה כלפי שחקנים או הצוות.</li>
+<li>יש לכבד את כל השחקנים והצוות, בלי קשר לדעה, גזע, מין או דת.</li>
+<li>לא תאפשר השתתפות בשיחות גזעניות או אלימות מכל סוג.</li>
+<li>יש לשמור על אווירה מכבדת ונעימה, ולדאוג לא לפגוע במשחק של אחרים.</li>
+<li>אסור לשתף תוכן לא הולמים כמו תמונות, סרטונים או לינקים פוגעניים.</li>
+                    </ul>
+                </div>
+                
+                <div class="mb-8">
+                    <h3 class="text-xl font-bold mb-4 text-minecraft-water flex items-center">
+                        <i class="fas fa-gamepad mr-3"></i>
+                        כללי משחק
+                    </h3>
+                    <ul class="space-y-3 space-y-reverse list-disc pr-5 text-blue-500">
+<li>אסור להרביץ או להכות שחקנים במקומות שבהם זה אסור (כגון: אזורי בטיחות, אזורים מוגנים).</li>
+<li>אסור לגנוב חפצים, בלוקים או משאבים משחקנים אחרים.</li>
+<li>אין לבנות או לשתול דברים במקומות שמפריעים לאחרים או מעכבים את המשחק.</li>
+<li>אסור להשתמש בצ'יטים, האקרים או כל סוג של אמצעי לא הוגן.</li>
+<li>אסור לבצע רמאויות במשחק או לנצל באגים במערכת.</li>
+<li>יש להימנע מהרס של מבנים או חפצים לא שלך ללא אישור השחקן.</li>
+<li>אסור להשתמש בגרסאות או במודים שאינם רשמיים או שמפגעים בחוויית המשחק של אחרים.</li>
+                    </ul>
+                </div>
+                
+                <div class="mb-8">
+                    <h3 class="text-xl font-bold mb-4 text-minecraft-water flex items-center">
+                        <i class="fas fa-gavel mr-3"></i>
+                        אכיפת החוקים
+                    </h3>
+                    <ul class="space-y-3 space-y-reverse list-disc pr-5 text-gray-700">
+<li>צוות השרת שומר לעצמו את הזכות להעניש כל שחקן שמפר את הכללים – אזהרה, השעיה או באן זמני/קבוע.</li>
+<li>שחקנים שמפרים את הכללים עלולים להיתקל בבדיקות או במעקבים כדי לוודא שהם פועלים בהוגנות.</li>
+<li>הצוות מבצע אכיפת חוקים בצורה בלתי תלויה – כל דיווח ייבדק בצורה הוגנת ומדויקת.</li>
+<li>אם יימצא שחקן שמפר את הכללים בצורה חמורה או חוזר על כך מספר פעמים, הוא עלול להיות מנוע מלשחק בשרת לצמיתות.</li>
+<li>יש להיענות לכל בקשה מהצוות בעת אכיפת החוקים – אי ציות יוביל לענישה נוספת.</li>
+<li>שחקנים יכולים לדווח על עבירות לחוקי השרת דרך מערכת כרטיסים (טיקטים), והצוות יטפל בזה בזמן הקצר ביותר.</li>
+<li>הענישה תינתן לפי חומרת העבירה, וכוללת אפשרויות כמו אזהרות, השעיות, בנים או שלילת גישות.</li>
+                    </ul>
+                </div>
+                
+                <div class="p-4 bg-minecraft-water bg-opacity-10 rounded-lg border border-minecraft-water border-opacity-30">
+                    <p class="text-minecraft-dirt font-semibold text-center">
+                        <i class="fas fa-heart mr-2 text-minecraft-emerald"></i>
+                        זכרו: המטרה שלנו היא ליצור סביבה בטוחה ונעימה לכל השחקנים. אם אתם נתקלים בבעיה, אנא דווחו לצוות.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VIP Section -->
+    <section id="vip" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-minecraft-dirt section-title">חבילות VIP</h2>
+            <p class="text-center mb-10 max-w-2xl mx-auto text-gray-700">
+                שדרגו את החוויה שלכם בשרת עם אחת מחבילות ה-VIP שלנו. התמיכה שלכם עוזרת לנו לשמור על השרת ולהמשיך לפתח אותו!
+            </p>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                <!-- VIP Card -->
+                <div class="vip-card bg-white rounded-lg shadow-xl overflow-hidden border-t-minecraft-diamond">
+                    <div class="bg-minecraft-diamond bg-opacity-90 text-white py-6 px-8">
+                        <h3 class="text-2xl font-bold flex items-center">
+                            <i class="fas fa-gem mr-3"></i>
+                            חבילת VIP
+                        </h3>
+                        <p class="text-xl mt-2">$10</p>
+                    </div>
+                    <div class="p-8">
+                        <ul class="space-y-4 space-y-reverse mb-8">
+                            <li class="flex items-start space-x-4 space-x-reverse">
+                                <i class="fas fa-check-circle text-minecraft-emerald mt-1"></i>
+                                <div>
+                                    <span class="font-bold">כינוי בצבע מיוחד</span>
+                                    <p class="text-sm text-gray-600">בחרו צבע ייחודי לשם המשתמש שלכם</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start space-x-4 space-x-reverse">
+                                <i class="fas fa-check-circle text-minecraft-emerald mt-1"></i>
+                                <div>
+                                    <span class="font-bold">גישה לפקודות מיוחדות</span>
+                                    <p class="text-sm text-gray-600">כגון /hat, /fly, /feed ועוד</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start space-x-4 space-x-reverse">
+                                <i class="fas fa-check-circle text-minecraft-emerald mt-1"></i>
+                                <div>
+                                    <span class="font-bold">תג VIP ליד השם</span>
+                                    <p class="text-sm text-gray-600">כל השחקנים יראו שאתם תומכים בשרת</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start space-x-4 space-x-reverse">
+                                <i class="fas fa-check-circle text-minecraft-emerald mt-1"></i>
+                                <div>
+                                    <span class="font-bold">גישה לאזורים מיוחדים</span>
+                                    <p class="text-sm text-gray-600">כניסה לאזורי VIP בלבד</p>
+                                </div>
+                            </li>
+                        </ul>
+                        <button class="w-full bg-minecraft-diamond hover:bg-minecraft-water text-white font-bold py-3 px-4 rounded transition duration-300 flex items-center justify-center">
+                            <i class="fab fa-paypal mr-3"></i>
+                            רכישה דרך PayPal
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- VIP+ Card -->
+                <div class="vip-card bg-white rounded-lg shadow-xl overflow-hidden border-t-minecraft-emerald relative">
+                    <div class="bg-minecraft-emerald bg-opacity-90 text-white py-6 px-8">
+                        <div class="absolute top-0 left-0 bg-yellow-500 text-xs font-bold px-2 py-1 rounded-br">
+                            <i class="fas fa-star mr-1"></i>
+                            הכי פופולרי
+                        </div>
+                        <h3 class="text-2xl font-bold flex items-center">
+                            <i class="fas fa-crown mr-3"></i>
+                            חבילת VIP+
+                        </h3>
+                        <p class="text-xl mt-2">$17</p>
+                    </div>
+                    <div class="p-8">
+                        <ul class="space-y-4 space-y-reverse mb-8">
+                            <li class="flex items-start space-x-4 space-x-reverse">
+                                <i class="fas fa-check-circle text-minecraft-emerald mt-1"></i>
+                                <div>
+                                    <span class="font-bold">כל היתרונות של VIP</span>
+                                    <p class="text-sm text-gray-600">פלוס כל התכונות הבאות:</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start space-x-4 space-x-reverse">
+                                <i class="fas fa-check-circle text-minecraft-emerald mt-1"></i>
+                                <div>
+                                    <span class="font-bold">ערכות יומיות</span>
+                                    <p class="text-sm text-gray-600">קבלו ערכה יומית עם חפצים מיוחדים</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start space-x-4 space-x-reverse">
+                                <i class="fas fa-check-circle text-minecraft-emerald mt-1"></i>
+                                <div>
+                                    <span class="font-bold">אזורים בלעדיים</span>
+                                    <p class="text-sm text-gray-600">גישה לאזורי בנייה ומיני-גיימים בלעדיים</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start space-x-4 space-x-reverse">
+                                <i class="fas fa-check-circle text-minecraft-emerald mt-1"></i>
+                                <div>
+                                    <span class="font-bold">תמיכה מועדפת</span>
+                                    <p class="text-sm text-gray-600">עדיפות בטיפול בבקשות ופניות לצוות</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start space-x-4 space-x-reverse">
+                                <i class="fas fa-check-circle text-minecraft-emerald mt-1"></i>
+                                <div>
+                                    <span class="font-bold">הטבות נוספות</span>
+                                    <p class="text-sm text-gray-600">הזמנות לאירועים VIP, מתנות חודשיות ועוד</p>
+                                </div>
+                            </li>
+                        </ul>
+                        <button class="w-full bg-minecraft-emerald hover:bg-minecraft-grass text-white font-bold py-3 px-4 rounded transition duration-300 flex items-center justify-center">
+                            <i class="fab fa-paypal mr-3"></i>
+                            רכישה דרך PayPal
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-12 max-w-3xl mx-auto bg-white p-6 rounded-lg shadow-md">
+                <h3 class="text-xl font-bold mb-4 text-center text-minecraft-water">שאלות נפוצות</h3>
+                <div class="space-y-4 space-y-reverse">
+                    <div class="border-b border-gray-200 pb-4">
+                        <button class="flex justify-between items-center w-full text-left font-bold text-minecraft-dirt">
+                            <span>איך מקבלים את ההרשאות אחרי התשלום?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <p class="mt-2 text-gray-700 hidden">ההרשאות ניתנות באופן אוטומטי תוך 5 דקות מהתשלום. אם הן לא התקבלו, אנא צרו קשר עם הצוות עם פרטי הרכישה.</p>
+                    </div>
+                    <div class="border-b border-gray-200 pb-4">
+                        <button class="flex justify-between items-center w-full text-left font-bold text-minecraft-dirt">
+                            <span>האם אפשר לשדרג מ-VIP ל-VIP+?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <p class="mt-2 text-gray-700 hidden">כן, ניתן לשדרג בכל עת. יש לשלם את ההפרש ($7) ולציין בהערה שמדובר בשדרוג.</p>
+                    </div>
+                    <div class="border-b border-gray-200 pb-4">
+                        <button class="flex justify-between items-center w-full text-left font-bold text-minecraft-dirt">
+                            <span>לכמה זמן תקפה החבילה?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <p class="mt-2 text-gray-700 hidden">חבילות ה-VIP שלנו הן לתקופה של חודש אחד. ניתן לחדש באופן ידני או להגדיר תשלום חוזר ב-PayPal.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-minecraft-dirt section-title">גלריה</h2>
+            
+            <div class="mb-8">
+                <h3 class="text-xl font-bold mb-6 text-minecraft-water text-center">סרטוני השרת</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="aspect-w-16 aspect-h-9 bg-gray-200 rounded-lg overflow-hidden">
+                        <iframe class="w-full h-full" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="aspect-w-16 aspect-h-9 bg-gray-200 rounded-lg overflow-hidden">
+                        <iframe class="w-full h-full" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-12">
+                <h3 class="text-xl font-bold mb-6 text-minecraft-water text-center">תמונות מהשרת</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="gallery-item overflow-hidden rounded-lg shadow-md cursor-pointer">
+                        <img src="https://images.unsplash.com/photo-1586810724476-c294fb7ac01b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="בנייה יצירתית" class="w-full h-48 object-cover transition duration-300 hover:scale-110">
+                    </div>
+                    <div class="gallery-item overflow-hidden rounded-lg shadow-md cursor-pointer">
+                        <img src="https://images.unsplash.com/photo-1627855437693-dcc7b0c4ba8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="אירוע קהילתי" class="w-full h-48 object-cover transition duration-300 hover:scale-110">
+                    </div>
+                    <div class="gallery-item overflow-hidden rounded-lg shadow-md cursor-pointer">
+                        <img src="https://images.unsplash.com/photo-1627855437698-d6d62c3c7ef3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="מיני-גיימים" class="w-full h-48 object-cover transition duration-300 hover:scale-110">
+                    </div>
+                    <div class="gallery-item overflow-hidden rounded-lg shadow-md cursor-pointer">
+                        <img src="https://images.unsplash.com/photo-1627855437693-dcc7b0c4ba8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="עולם פתוח" class="w-full h-48 object-cover transition duration-300 hover:scale-110">
+                    </div>
+                </div>
+                <div class="text-center mt-6">
+                    <button class="bg-minecraft-water hover:bg-minecraft-diamond text-white font-bold py-2 px-6 rounded transition duration-300">
+                        צפו בעוד תמונות
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Section -->
+    <section id="news" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-minecraft-dirt section-title">חדשות ועדכונים</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- News Item 1 -->
+                <div class="news-card bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="h-48 bg-minecraft-grass bg-opacity-20 flex items-center justify-center">
+                        <i class="fas fa-calendar-alt text-5xl text-minecraft-grass opacity-50"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-sm text-minecraft-water font-bold">15/07/2023</span>
+                            <span class="text-sm bg-minecraft-emerald bg-opacity-20 text-minecraft-emerald px-2 py-1 rounded">אירוע</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-minecraft-dirt mb-3">טורניר בנייה שבועי</h3>
+                        <p class="text-gray-700 mb-4">הטורניר השבועי שלנו חוזר עם קטגוריה חדשה: "ערים עתידניות". פרסים למקומות הראשונים!</p>
+                        <a href="#" class="text-minecraft-water font-bold hover:underline flex items-center">
+                            קרא עוד
+                            <i class="fas fa-chevron-left mr-2 text-sm"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- News Item 2 -->
+                <div class="news-card bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="h-48 bg-minecraft-diamond bg-opacity-20 flex items-center justify-center">
+                        <i class="fas fa-wrench text-5xl text-minecraft-diamond opacity-50"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-sm text-minecraft-water font-bold">10/07/2023</span>
+                            <span class="text-sm bg-minecraft-diamond bg-opacity-20 text-minecraft-diamond px-2 py-1 rounded">עדכון</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-minecraft-dirt mb-3">עדכון שרת 1.20.1</h3>
+                        <p class="text-gray-700 mb-4">השרת עודכן לגרסה החדשה של מיינקראפט! כולל תיקוני באגים ושיפורי ביצועים.</p>
+                        <a href="#" class="text-minecraft-water font-bold hover:underline flex items-center">
+                            קרא עוד
+                            <i class="fas fa-chevron-left mr-2 text-sm"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- News Item 3 -->
+                <div class="news-card bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="h-48 bg-minecraft-emerald bg-opacity-20 flex items-center justify-center">
+                        <i class="fas fa-users text-5xl text-minecraft-emerald opacity-50"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-sm text-minecraft-water font-bold">05/07/2023</span>
+                            <span class="text-sm bg-minecraft-stone bg-opacity-20 text-minecraft-stone px-2 py-1 rounded">קהילה</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-minecraft-dirt mb-3">מפגש קהילה חודשי</h3>
+                        <p class="text-gray-700 mb-4">מזמינים את כל השחקנים למפגש קהילה דיגיטלי בו נשמע רעיונות לשיפור השרת.</p>
+                        <a href="#" class="text-minecraft-water font-bold hover:underline flex items-center">
+                            קרא עוד
+                            <i class="fas fa-chevron-left mr-2 text-sm"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-10">
+                <button class="bg-minecraft-water hover:bg-minecraft-diamond text-white font-bold py-3 px-8 rounded transition duration-300">
+                    כל החדשות
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-16 bg-minecraft-dirt bg-opacity-90 text-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 section-title">מה השחקנים אומרים?</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card p-6 rounded-lg">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-minecraft-water rounded-full flex items-center justify-center text-white font-bold mr-4">א</div>
+                        <div>
+                            <h4 class="font-bold text-minecraft-dirt">אביב כהן</h4>
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic">"השרת הזה שינה לי את החיים! בתור אדם עם אוטיזם, קשה לי למצוא מקומות שבהם מרגישים בטוח ומקבלים. כאן הצוות והשחקנים ממש מבינים."</p>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card p-6 rounded-lg">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-minecraft-emerald rounded-full flex items-center justify-center text-white font-bold mr-4">מ</div>
+                        <div>
+                            <h4 class="font-bold text-minecraft-dirt">מיכל לוי</h4>
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic">"הבן שלי עם ADHD לא מפסיק לדבר על השרת הזה. סוף סוף מצא חברים שמבינים אותו ומשחקים איתו בלי ללעוג. תודה לצוות המדהים!"</p>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card p-6 rounded-lg">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-minecraft-diamond rounded-full flex items-center justify-center text-white font-bold mr-4">י</div>
+                        <div>
+                            <h4 class="font-bold text-minecraft-dirt">יואב סמית</h4>
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic">"אני שחקן ותיק במיינקראפט ומעולם לא ראיתי שרת כל כך מסודר ומאורגן. החוקים ברורים, הצוות זמין, והאווירה ממש משפחתית. מומלץ בחום!"</p>
+                </div>
+            </div>
+            
+            <div class="text-center mt-10">
+                <button class="bg-minecraft-emerald hover:bg-minecraft-grass text-white font-bold py-3 px-8 rounded transition duration-300">
+                    הוסיפו חוות דעת
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leaderboard Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-minecraft-dirt section-title">טבלת מובילים</h2>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="flex border-b border-gray-200 mb-4">
+                    <button class="leaderboard-tab active py-3 px-6 font-bold text-minecraft-water border-b-2 border-minecraft-water">שחקנים פעילים</button>
+                    <button class="leaderboard-tab py-3 px-6 font-bold text-gray-500">תומכים</button>
+                    <button class="leaderboard-tab py-3 px-6 font-bold text-gray-500">בוני השבוע</button>
+                </div>
+                
+                <div class="bg-gray-50 rounded-lg shadow-inner p-6">
+                    <div class="space-y-4 space-y-reverse">
+                        <!-- Player 1 -->
+                        <div class="flex items-center justify-between bg-white p-4 rounded-lg shadow-sm">
+                            <div class="flex items-center">
+                                <span class="text-xl font-bold text-minecraft-diamond mr-4 w-8 text-center">1</span>
+                                <div class="w-10 h-10 bg-minecraft-diamond bg-opacity-20 rounded-full flex items-center justify-center mr-3">
+                                    <i class="fas fa-user text-minecraft-diamond"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-minecraft-dirt">GamerPro</h4>
+                                    <p class="text-sm text-gray-600">שעות משחק: 142</p>
+                                </div>
+                            </div>
+                            <div class="text-minecraft-emerald font-bold">
+                                <i class="fas fa-medal mr-2"></i>
+                                5,240 נקודות
+                            </div>
+                        </div>
+                        
+                        <!-- Player 2 -->
+                        <div class="flex items-center justify-between bg-white p-4 rounded-lg shadow-sm">
+                            <div class="flex items-center">
+                                <span class="text-xl font-bold text-minecraft-stone mr-4 w-8 text-center">2</span>
+                                <div class="w-10 h-10 bg-minecraft-stone bg-opacity-20 rounded-full flex items-center justify-center mr-3">
+                                    <i class="fas fa-user text-minecraft-stone"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-minecraft-dirt">BuilderMaster</h4>
+                                    <p class="text-sm text-gray-600">שעות משחק: 128</p>
+                                </div>
+                            </div>
+                            <div class="text-minecraft-emerald font-bold">
+                                <i class="fas fa-medal mr-2"></i>
+                                4,850 נקודות
+                            </div>
+                        </div>
+                        
+                        <!-- Player 3 -->
+                        <div class="flex items-center justify-between bg-white p-4 rounded-lg shadow-sm">
+                            <div class="flex items-center">
+                                <span class="text-xl font-bold text-minecraft-wood mr-4 w-8 text-center">3</span>
+                                <div class="w-10 h-10 bg-minecraft-wood bg-opacity-20 rounded-full flex items-center justify-center mr-3">
+                                    <i class="fas fa-user text-minecraft-wood"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-minecraft-dirt">RedstoneWiz</h4>
+                                    <p class="text-sm text-gray-600">שעות משחק: 115</p>
+                                </div>
+                            </div>
+                            <div class="text-minecraft-emerald font-bold">
+                                <i class="fas fa-medal mr-2"></i>
+                                4,210 נקודות
+                            </div>
+                        </div>
+                        
+                        <!-- Player 4 -->
+                        <div class="flex items-center justify-between bg-white p-4 rounded-lg shadow-sm">
+                            <div class="flex items-center">
+                                <span class="text-xl font-bold text-gray-400 mr-4 w-8 text-center">4</span>
+                                <div class="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center mr-3">
+                                    <i class="fas fa-user text-gray-500"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-minecraft-dirt">MineCrafter12</h4>
+                                    <p class="text-sm text-gray-600">שעות משחק: 98</p>
+                                </div>
+                            </div>
+                            <div class="text-minecraft-emerald font-bold">
+                                <i class="fas fa-medal mr-2"></i>
+                                3,750 נקודות
+                            </div>
+                        </div>
+                        
+                        <!-- Player 5 -->
+                        <div class="flex items-center justify-between bg-white p-4 rounded-lg shadow-sm">
+                            <div class="flex items-center">
+                                <span class="text-xl font-bold text-gray-400 mr-4 w-8 text-center">5</span>
+                                <div class="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center mr-3">
+                                    <i class="fas fa-user text-gray-500"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-minecraft-dirt">DiamondFinder</h4>
+                                    <p class="text-sm text-gray-600">שעות משחק: 87</p>
+                                </div>
+                            </div>
+                            <div class="text-minecraft-emerald font-bold">
+                                <i class="fas fa-medal mr-2"></i>
+                                3,420 נקודות
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center mt-6">
+                        <button class="text-minecraft-water font-bold hover:underline">
+                            צפו בכל הטבלה
+                            <i class="fas fa-chevron-left mr-2"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Server Info Section -->
+    <section id="info" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-minecraft-dirt section-title">הצטרפו אלינו</h2>
+            
+            <div class="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-xl text-center">
+                <div class="mb-8">
+                    <i class="fas fa-server text-5xl text-minecraft-water mb-4"></i>
+                    <p class="text-xl mb-4">"כדי להצטרף לשרת, הזינו את הכתובת:"</p>
+                    <div class="bg-minecraft-dirt text-white py-4 px-6 rounded-lg inline-block">
+                        <code class="text-2xl font-mono font-bold">play.helpingilmc.net</code>
+                    </div>
+                </div>
+                
+                <div class="bg-minecraft-grass bg-opacity-10 p-6 rounded-lg border border-minecraft-grass border-opacity-30">
+                    <h3 class="text-xl font-bold mb-3 text-minecraft-dirt">מידע טכני</h3>
+                    <ul class="space-y-2 space-y-reverse text-gray-700">
+                        <li class="flex justify-center items-center">
+                            <i class="fas fa-check-circle text-minecraft-emerald mr-2"></i>
+                            גרסת מיינקראפט: 1.20.1
+                        </li>
+                        <li class="flex justify-center items-center">
+                            <i class="fas fa-check-circle text-minecraft-emerald mr-2"></i>
+                            זמינות: 24/7 עם גיבויים אוטומטיים
+                        </li>
+                        <li class="flex justify-center items-center">
+                            <i class="fas fa-check-circle text-minecraft-emerald mr-2"></i>
+                            שטח אחסון: 50GB SSD למשחק חלק
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-minecraft-dirt section-title">צור קשר</h2>
+            
+            <div class="max-w-4xl mx-auto">
+                <p class="text-center mb-8 text-lg max-w-2xl mx-auto">
+                    "יש לכם שאלה, תקלה או בקשה? כתבו לנו ונחזור אליכם בהקדם."
+                </p>
+                
+                <div class="flex flex-col lg:flex-row gap-8">
+                    <div class="lg:w-1/2">
+                        <form class="bg-gray-50 p-6 rounded-lg shadow-md">
+                            <div class="mb-4">
+                                <label for="fullName" class="block text-gray-700 mb-2 font-bold">שם מלא</label>
+                                <input type="text" id="fullName" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-minecraft-water">
+                            </div>
+                            <div class="mb-4">
+                                <label for="email" class="block text-gray-700 mb-2 font-bold">אימייל</label>
+                                <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-minecraft-water">
+                            </div>
+                            <div class="mb-4">
+                                <label for="category" class="block text-gray-700 mb-2 font-bold">קטגוריה</label>
+                                <select id="category" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-minecraft-water">
+                                    <option value="">בחרו קטגוריה</option>
+                                    <option value="support">תמיכה טכנית</option>
+                                    <option value="payment">בעיית תשלום</option>
+                                    <option value="suggestion">הצעה לשיפור</option>
+                                    <option value="report">דיווח על שחקן</option>
+                                    <option value="other">אחר</option>
+                                </select>
+                            </div>
+                            <div class="mb-6">
+                                <label for="message" class="block text-gray-700 mb-2 font-bold">הודעה</label>
+                                <textarea id="message" rows="5" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-minecraft-water"></textarea>
+                            </div>
+                            <button type="submit" class="w-full bg-minecraft-water hover:bg-minecraft-diamond text-white font-bold py-3 px-4 rounded transition duration-300">
+                                שלח הודעה
+                            </button>
+                        </form>
+                    </div>
+                    
+                    <div class="lg:w-1/2">
+                        <div class="bg-gray-50 p-6 rounded-lg shadow-md h-full">
+                            <h3 class="text-xl font-bold mb-6 text-minecraft-water">דרכי יצירת קשר נוספות</h3>
+                            
+                            <div class="space-y-6 space-y-reverse">
+                                <div class="flex items-start space-x-4 space-x-reverse">
+                                    <div class="bg-minecraft-emerald bg-opacity-20 p-3 rounded-full">
+                                        <i class="fas fa-envelope text-minecraft-emerald text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-minecraft-dirt mb-1">אימייל</h4>
+                                        <a href="mailto:support@helpingilmc.net" class="text-minecraft-water hover:underline">support@helpingilmc.net</a>
+                                        <p class="text-sm text-gray-600 mt-1">תגובה תוך 24 שעות</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start space-x-4 space-x-reverse">
+                                    <div class="bg-minecraft-diamond bg-opacity-20 p-3 rounded-full">
+                                        <i class="fab fa-discord text-minecraft-diamond text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-minecraft-dirt mb-1">דיסקורד</h4>
+                                        <a href="#" class="text-minecraft-water hover:underline">הצטרפו לשרת שלנו</a>
+                                        <p class="text-sm text-gray-600 mt-1">תמיכה בזמן אמת</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start space-x-4 space-x-reverse">
+                                    <div class="bg-minecraft-grass bg-opacity-20 p-3 rounded-full">
+                                        <i class="fas fa-phone-alt text-minecraft-grass text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-minecraft-dirt mb-1">טלפון</h4>
+                                        <a href="tel:+972501234567" class="text-minecraft-water hover:underline">050-123-4567</a>
+                                        <p class="text-sm text-gray-600 mt-1">א'-ה' 10:00-18:00</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start space-x-4 space-x-reverse">
+                                    <div class="bg-minecraft-stone bg-opacity-20 p-3 rounded-full">
+                                        <i class="fas fa-map-marker-alt text-minecraft-stone text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-minecraft-dirt mb-1">כתובת</h4>
+                                        <p class="text-gray-700">השרת פיזית ממוקם בחוות שרתים בתל אביב עם חיבור אינטרנט מהיר ויציב</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-8">
+                                <h4 class="font-bold text-minecraft-dirt mb-3">עקבו אחרינו במדיה החברתית</h4>
+                                <div class="flex space-x-4 space-x-reverse">
+                                    <a href="#" class="social-icon bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-full">
+                                        <i class="fab fa-facebook-f"></i>
+                                    </a>
+                                    <a href="#" class="social-icon bg-pink-600 hover:bg-pink-700 text-white p-3 rounded-full">
+                                        <i class="fab fa-tiktok"></i>
+                                    </a>
+                                    <a href="#" class="social-icon bg-red-600 hover:bg-red-700 text-white p-3 rounded-full">
+                                        <i class="fab fa-youtube"></i>
+                                    </a>
+                                    <a href="#" class="social-icon bg-blue-400 hover:bg-blue-500 text-white p-3 rounded-full">
+                                        <i class="fab fa-twitter"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-minecraft-dirt text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4 flex items-center">
+                        <i class="fas fa-cube mr-3 text-minecraft-emerald"></i>
+                        HelpingIL | MC
+                    </h3>
+                    <p class="text-minecraft-stone">
+                        שרת מיינקראפט קהילתי לכולם, עם דגש על נגישות והכלה לשחקנים עם צרכים מיוחדים.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4">קישורים מהירים</h4>
+                    <ul class="space-y-2 space-y-reverse">
+                        <li><a href="#home" class="text-minecraft-stone hover:text-white transition">בית</a></li>
+                        <li><a href="#rules" class="text-minecraft-stone hover:text-white transition">חוקים</a></li>
+                        <li><a href="#vip" class="text-minecraft-stone hover:text-white transition">חבילות VIP</a></li>
+                        <li><a href="#news" class="text-minecraft-stone hover:text-white transition">חדשות</a></li>
+                        <li><a href="#contact" class="text-minecraft-stone hover:text-white transition">צור קשר</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4">מידע שרת</h4>
+                    <ul class="space-y-2 space-y-reverse">
+                        <li class="flex items-center">
+                            <i class="fas fa-server text-minecraft-stone mr-2"></i>
+                            <span>play.helpingilmc.net</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-code-branch text-minecraft-stone mr-2"></i>
+                            <span>גרסה 1.20.1</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-clock text-minecraft-stone mr-2"></i>
+                            <span>24/7</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-shield-alt text-minecraft-stone mr-2"></i>
+                            <span>אנטי-צ'יט פעיל</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4">מדיה חברתית</h4>
+                    <div class="flex space-x-4 space-x-reverse mb-4">
+                        <a href="#" class="text-minecraft-stone hover:text-white transition text-xl">
+                            <i class="fab fa-discord"></i>
+                        </a>
+                        <a href="#" class="text-minecraft-stone hover:text-white transition text-xl">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="#" class="text-minecraft-stone hover:text-white transition text-xl">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                        <a href="#" class="text-minecraft-stone hover:text-white transition text-xl">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </div>
+                    <p class="text-sm text-minecraft-stone">
+                        הירשמו לניוזלטר לקבלת עדכונים:
+                    </p>
+                    <div class="flex mt-2">
+                        <input type="email" placeholder="האימייל שלכם" class="px-3 py-2 rounded-r-lg focus:outline-none text-gray-800 w-full">
+                        <button class="bg-minecraft-emerald hover:bg-minecraft-grass text-white px-4 py-2 rounded-l-lg transition">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-minecraft-stone border-opacity-30 mt-8 pt-8 text-center">
+                <p class="text-minecraft-stone">
+                    <i class="fas fa-heart text-minecraft-emerald mr-1"></i>
+                    "נבנה באהבה עבור קהילת הגיימינג של הצרכים המיוחדים"
+                </p>
+                <p class="text-sm text-minecraft-stone mt-2">
+                    © 2023 HelpingIL | MC. כל הזכויות שמורות. השרת אינו קשור ל-Mojang או Microsoft.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            document.getElementById('mobileMenu').classList.toggle('hidden');
+        });
+        
+        document.getElementById('closeMobileMenu').addEventListener('click', function() {
+            document.getElementById('mobileMenu').classList.add('hidden');
+        });
+
+        // Simulate player count update
+        setInterval(() => {
+            const countElement = document.getElementById('playerCount');
+            let count = parseInt(countElement.textContent);
+            count = (count + Math.floor(Math.random() * 3) - 1); // Random small change
+            count = Math.max(15, Math.min(35, count)); // Keep between 15-35
+            countElement.textContent = count;
+        }, 5000);
+
+        // Countdown timer
+        function updateCountdown() {
+            const now = new Date();
+            const eventDate = new Date(2023, 6, 15, 18, 0, 0); // July 15, 2023 at 18:00
+            
+            // If event has passed, set to next week
+            if (now > eventDate) {
+                eventDate.setDate(eventDate.getDate() + 7);
+            }
+            
+            const diff = eventDate - now;
+            
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(
+</html>
